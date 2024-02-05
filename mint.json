@@ -17,13 +17,13 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "客服支持",
+      "url": "https://t.me/cakeipip"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "控制台",
+    "url": "https://www.cakeip.com/admin"
   },
   "tabs": [
     {
