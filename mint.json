@@ -3,7 +3,7 @@
   "name": "CakeIP",
   "logo": {
     "dark": "https://www.cakeip.com/admin/assets/logo_black-e25e7d8b.png",
-    "light": "/logo/light.svg"
+    "light": "https://www.cakeip.com/admin/assets/logo-8ec71aac.png"
   },
   "favicon": "/favicon.svg",
   "colors": {
