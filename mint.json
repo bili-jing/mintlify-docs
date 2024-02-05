@@ -29,10 +29,6 @@
     {
       "name": "API Reference",
       "url": "api-reference"
-    },
-    {
-      "name": "测试tab",
-      "url": "api-reference"
     }
   ],
   "navigation": [
@@ -56,7 +52,7 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "公共参数",
       "pages": [
         "api-reference/introduction"
       ]
