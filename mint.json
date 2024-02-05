@@ -5,7 +5,7 @@
     "dark": "https://www.cakeip.com/admin/assets/logo_black-e25e7d8b.png",
     "light": "https://www.cakeip.com/admin/assets/logo-8ec71aac.png"
   },
-  "favicon": "https://www.cakeip.com/admin/favicon.ico",
+  "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
