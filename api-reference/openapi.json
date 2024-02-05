@@ -13,52 +13,8 @@
       "url": "https://apiv1.cakeip.com/openapi"
     }
   ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
   "paths": {
     "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "description": "Creates a new plant in the store",
         "requestBody": {
@@ -132,6 +88,22 @@
   },
   "components": {
     "schemas": {
+    "CommonRequestBody": {
+        "required": [
+          "appKey"
+        ],
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "description": "动态参数集合"
+        },
+        "appKey": {
+          "type": "string",
+          "description": "AppKey密钥"
+        }
+      }
+    },
       "Plant": {
         "required": [
           "name"
@@ -151,18 +123,17 @@
       "NewPlant": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Plant"
+            "$ref": "#/components/schemas/CommonRequestBody"
           },
           {
             "required": [
-              "id"
+              "ipAddress"
             ],
             "type": "object",
             "properties": {
               "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+                "description": "IP地址",
+                "type": "string"
               }
             }
           }
