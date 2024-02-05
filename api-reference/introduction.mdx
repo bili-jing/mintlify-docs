@@ -1,33 +1,37 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: '公共参数'
+description: 'CakeIP 开放接口公共参数'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# API 文档
 
-## Welcome
+## 基础服务器地址
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+- 基础服务器地址：[https://apiv1.cakeip.com/openapi](https://apiv1.cakeip.com/openapi)
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## 基础请求参数
 
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+- 基础请求参数：
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+    "params": {},
+    "appKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+}
 ```
+
+### 参数说明
+
+<ResponseField name="appKey" type="string" required>
+  appKey 密钥
+</ResponseField>
+
+<ResponseField name="params" type="object" required>
+  参数集合
+</ResponseField>
+
+## 备注
+
+- 所有请求都需要传 `appKey`。
+
+![说明图片](https://oss.laf.dev/eobh98-img/cakeip_docs.jpg)
