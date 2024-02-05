@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "CakeIP",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "https://www.cakeip.com/admin/assets/logo_black-e25e7d8b.png",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
