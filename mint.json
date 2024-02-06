@@ -15,6 +15,9 @@
       "to": "#07C983"
     }
   },
+  "primaryTab": {
+    "name": "简介"
+  },
   "topbarLinks": [
     {
       "name": "客服支持",
@@ -27,28 +30,15 @@
   },
   "tabs": [
     {
-      "name": "API Reference",
+      "name": "API 文档",
       "url": "api-reference"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "快速开始",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "quickstart"
       ]
     },
     {
@@ -64,11 +54,28 @@
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
       ]
+    },
+    {
+      "group": "流量相关",
+      "pages": [
+        "api-reference/traffic/get"
+      ]
+    },
+    {
+      "group": "代理商相关",
+      "pages": [
+        "api-reference/agent/addUser",
+        "api-reference/agent/shareTraffic",
+        "api-reference/agent/queryTraffic"
+      ]
+    },
+    {
+      "group": "代理IP相关",
+      "pages": [
+        "api-reference/ip/getIpAddress"
+      ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
 }

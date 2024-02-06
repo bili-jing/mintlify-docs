@@ -14,9 +14,9 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/account/addWhitelist": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "用户添加白名单",
         "requestBody": {
           "description": "Plant to add to the store",
           "content": {
@@ -52,25 +52,258 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
+    "/account/removeWhitelist": {
+      "post": {
+        "description": "用户删除白名单",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
-        ],
+        }
+      }
+    },
+    "/account/getWhitelist": {
+      "post": {
+        "description": "用户获取白名单列表",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommonRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/getUsableTraffic": {
+      "post": {
+        "description": "用户获取剩余流量",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommonRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Traffic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/addUser": {
+      "post": {
+        "description": "代理商添加用户",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentAddUser"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/shareTraffic": {
+      "post": {
+        "description": "代理商分配流量",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShareTraffic"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/queryTraffic": {
+      "post": {
+        "description": "代理商查询用户流量",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryTraffic"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Traffic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ip/getIpAddress":{
+      "post": {
+        "description": "代理商获取代理IP服务器地址",
+        "requestBody": {
+          "description": "Plant to add to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetIpAddressParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "响应成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetIpAddressResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "unexpected error",
@@ -101,13 +334,55 @@
       "Plant": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
             "type": "string"
           },
-          "tag": {
-            "description": "Tag to specify the type",
+          "data":{
+            "description": "响应数据",
+            "type": "object"
+          }
+        },
+        "required": ["name"]
+      },
+      "Traffic": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
             "type": "string"
+          },
+          "data":{
+            "description": "响应数据",
+            "type": "object",
+            "properties": {
+              "traffic": {
+                "type": "integer",
+                "format": "int32",
+                "description": "剩余流量"
+              },
+              "fullTraffic": {
+                "type": "integer",
+                "format": "int32",
+                "description": "总流量"
+              }
+            }
           }
         },
         "required": ["name"]
@@ -116,20 +391,182 @@
         "type": "object",
         "properties": {
           "appKey": {
-            "type": "string"
+            "type": "string",
+            "description":"AppKey密钥"
           },
           "params": {
             "type": "object",
             "properties": {
               "ipAddress": {
-                "type": "string"
+                "type": "string",
+                "description" : "IP地址"
               }
             },
             "required": ["ipAddress"],
-            "description": "动态参数集合,包括ipAddress"
+            "description": "动态参数集合"
           }
         },
         "required": ["appKey", "params"]
+      },
+      "AgentAddUser": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string",
+                "description" : "用户名"
+              },
+              "password": {
+                "type": "string",
+                "description": "密码"
+              }
+            },
+            "required": ["username", "password"],
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
+      },
+      "ShareTraffic": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string",
+                "description" : "用户名"
+              },
+              "traffic": {
+                "type": "integer",
+                "format": "int32",
+                "description": "流量"
+              }
+            },
+            "required": ["username", "traffic"],
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
+      },
+      "QueryTraffic": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "username": {
+                "type": "string",
+                "description" : "用户名"
+              }
+            },
+            "required": ["username"],
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
+      },
+      "IpAddress": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "data":{
+            "description": "响应数据",
+            "type": "object",
+            "properties": {
+              "ipAddress": {
+                "type": "string",
+                "description": "IP地址"
+              }
+            }
+          }
+        },
+        "required": ["name"]
+      },
+      "GetIpAddressParams":{
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "asian": {
+                "type": "integer",
+                "description" : "地区 0:非亚洲 1:亚洲",
+                "enum": [0, 1],
+                "example": 0,
+                "format": "int32"
+              }
+            },
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
+      },
+      "GetIpAddressResponse":{
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "data":{
+            "description": "响应数据",
+            "type": "object",
+            "properties": {
+              "hosts": {
+                "type": "array",
+                "description": "IP地址",
+                "items": {
+                  "type": "string"
+                },
+                "example": ["137.184.190.238","164.92.111.133"]
+              },
+              "port": {
+                "type": "integer",
+                "format": "int32",
+                "description": "端口"
+              }
+            }
+          }
+        },
+        "required": ["name"]
       },
       "Error": {
         "type": "object",
