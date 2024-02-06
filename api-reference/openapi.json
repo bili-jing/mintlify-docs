@@ -94,10 +94,6 @@
         ],
       "type": "object",
       "properties": {
-        "params": {
-          "type": "object",
-          "description": "动态参数集合"
-        },
         "appKey": {
           "type": "string",
           "description": "AppKey密钥"
@@ -126,15 +122,15 @@
             "$ref": "#/components/schemas/CommonRequestBody"
           },
           {
-            "required": [
-              "ipAddress"
-            ],
+            "params": {
             "type": "object",
-            "properties": {
+             "description": "动态参数集合",
+             "properties": {
               "ipAddress": {
                 "description": "IP地址",
                 "type": "string"
               }
+            }
             }
           }
         ]
