@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/account/addWhitelist": {
       "post": {
         "description": "Creates a new plant in the store",
         "requestBody": {
@@ -123,15 +123,15 @@
           },
           {
             "params": {
-            "type": "object",
-             "description": "动态参数集合",
-             "properties": {
-              "ipAddress": {
-                "description": "IP地址",
-                "type": "string"
-              }
+          "type": "object",
+          "properties": {
+            "ipAddress": {
+              "type": "string"
             }
-            }
+          },
+          "required": ["ipAddress"],  
+          "description": "动态参数集合,包括ipAddress"
+        }
           }
         ]
       },
