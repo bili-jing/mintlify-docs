@@ -113,21 +113,21 @@
         "required": ["name"]
       },
       "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CommonRequestBody"
-          },
-          {
+        "type": "object",
+        "properties": {
+          "params": {
             "type": "object",
             "properties": {
               "ipAddress": {
                 "type": "string"
               }
-            },
-            "required": ["ipAddress"],
-            "description": "动态参数集合,包括ipAddress"
+            }
+          },
+          "appKey": {
+            "type": "string"
           }
-        ]
+        },
+        "required": ["appKey"]
       },
       "Error": {
         "type": "object",
