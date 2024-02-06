@@ -115,19 +115,21 @@
       "NewPlant": {
         "type": "object",
         "properties": {
+          "appKey": {
+            "type": "string"
+          },
           "params": {
             "type": "object",
             "properties": {
               "ipAddress": {
                 "type": "string"
               }
-            }
-          },
-          "appKey": {
-            "type": "string"
+            },
+            "required": ["ipAddress"],
+            "description": "动态参数集合,包括ipAddress"
           }
         },
-        "required": ["appKey"]
+        "required": ["appKey", "params"]
       },
       "Error": {
         "type": "object",
