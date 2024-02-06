@@ -131,7 +131,7 @@
             ],
             "type": "object",
             "properties": {
-              "id": {
+              "ipAddress": {
                 "description": "IP地址",
                 "type": "string"
               }
