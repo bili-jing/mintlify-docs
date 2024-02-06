@@ -88,22 +88,17 @@
   },
   "components": {
     "schemas": {
-    "CommonRequestBody": {
-        "required": [
-          "appKey"
-        ],
-      "type": "object",
-      "properties": {
-        "appKey": {
-          "type": "string",
-          "description": "AppKey密钥"
-        }
-      }
-    },
+      "CommonRequestBody": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description": "AppKey密钥"
+          }
+        },
+        "required": ["appKey"]
+      },
       "Plant": {
-        "required": [
-          "name"
-        ],
         "type": "object",
         "properties": {
           "name": {
@@ -114,7 +109,8 @@
             "description": "Tag to specify the type",
             "type": "string"
           }
-        }
+        },
+        "required": ["name"]
       },
       "NewPlant": {
         "allOf": [
@@ -122,24 +118,18 @@
             "$ref": "#/components/schemas/CommonRequestBody"
           },
           {
-            "params": {
-          "type": "object",
-          "properties": {
-            "ipAddress": {
-              "type": "string"
-            }
-          },
-          "required": ["ipAddress"],  
-          "description": "动态参数集合,包括ipAddress"
-        }
+            "type": "object",
+            "properties": {
+              "ipAddress": {
+                "type": "string"
+              }
+            },
+            "required": ["ipAddress"],
+            "description": "动态参数集合,包括ipAddress"
           }
         ]
       },
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
         "type": "object",
         "properties": {
           "error": {
@@ -149,7 +139,8 @@
           "message": {
             "type": "string"
           }
-        }
+        },
+        "required": ["error", "message"]
       }
     }
   }
