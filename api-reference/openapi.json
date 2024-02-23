@@ -317,6 +317,82 @@
           }
         }
       }
+    },
+    "/ip/getCountryList":{
+      "post": {
+        "description": "代理商获取国家列表",
+        "requestBody": {
+          "description": "获取国家列表",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommonRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "响应成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCountryListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ip/getRegionList":{
+      "post": {
+        "description": "代理商获取国家列表",
+        "requestBody": {
+          "description": "获取国家列表",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRegionListParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "响应成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCountryListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -567,6 +643,61 @@
           }
         },
         "required": ["name"]
+      },
+      "GetCountryListResponse":{
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
+            "type": "string"
+          },
+          "data":{
+            "description": "响应数据",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties":{
+                "name": {
+                  "type": "string",
+                  "description": "名称"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "代码"
+                }
+              }
+            }
+          }
+        },
+        "required": ["name"]
+      },
+      "GetRegionListParams":{
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "countryId": {
+                "type": "string",
+                "description" : "国家代码"
+              }
+            },
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
       },
       "Error": {
         "type": "object",

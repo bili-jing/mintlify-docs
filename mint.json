@@ -72,7 +72,9 @@
     {
       "group": "代理IP相关",
       "pages": [
-        "api-reference/ip/getIpAddress"
+        "api-reference/ip/getIpAddress",
+        "api-reference/ip/getCountryList",
+        "api-reference/ip/getRegionList"
       ]
     }
   ],
