@@ -280,6 +280,44 @@
         }
       }
     },
+    "/account/getAuthInfo": {
+      "post": {
+        "description": "代理商查询认证帐户信息",
+        "requestBody": {
+          "description": "查询认证帐户信息",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommonRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "认证帐户信息响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ip/getIpAddress":{
       "post": {
         "description": "代理商获取代理IP服务器地址",
@@ -698,6 +736,42 @@
           }
         },
         "required": ["appKey", "params"]
+      },
+      "AuthInfoResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
+            "type": "string",
+            "example": "Success"
+          },
+          "data": {
+            "description": "认证帐户信息",
+            "type": "object",
+            "properties": {
+              "proxyUser": {
+                "type": "string",
+                "description": "代理用户名",
+                "example": "username"
+              },
+              "proxyPass": {
+                "type": "string",
+                "description": "代理密码",
+                "example": "password"
+              }
+            },
+            "required": ["proxyUser", "proxyPass"]
+          }
+        },
+        "required": ["code", "msg", "data"]
       },
       "Error": {
         "type": "object",
