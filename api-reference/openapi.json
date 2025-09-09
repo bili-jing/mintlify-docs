@@ -318,6 +318,44 @@
         }
       }
     },
+    "/account/queryTrafficUsage": {
+      "post": {
+        "description": "查询流量消耗",
+        "requestBody": {
+          "description": "查询流量消耗请求",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryTrafficUsage"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "流量消耗查询响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrafficUsageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/ip/getIpAddress":{
       "post": {
         "description": "代理商获取代理IP服务器地址",
@@ -769,6 +807,108 @@
               }
             },
             "required": ["proxyUser", "proxyPass"]
+          }
+        },
+        "required": ["code", "msg", "data"]
+      },
+      "QueryTrafficUsage": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description": "AppKey密钥"
+          },
+          "type": {
+            "type": "string",
+            "description": "查询类型",
+            "enum": ["5min", "day"],
+            "example": "5min"
+          },
+          "startDay": {
+            "type": "string",
+            "description": "开始日期",
+            "example": "2025-09-01"
+          },
+          "endDay": {
+            "type": "string",
+            "description": "结束日期",
+            "example": "2025-09-02"
+          }
+        },
+        "required": ["appKey", "type", "startDay", "endDay"]
+      },
+      "TrafficUsageResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "default": 0,
+            "description": "状态码，0为操作成功",
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [0, -1]
+          },
+          "msg": {
+            "description": "响应消息",
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "description": "流量使用数据",
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "format": "int32",
+                "description": "限制数量",
+                "example": 99999999
+              },
+              "offset": {
+                "type": "integer",
+                "format": "int32",
+                "description": "偏移量",
+                "example": 0
+              },
+              "count": {
+                "type": "integer",
+                "format": "int32",
+                "description": "当前数量",
+                "example": 287
+              },
+              "total": {
+                "type": "integer",
+                "format": "int32",
+                "description": "总数量",
+                "example": 287
+              },
+              "start_day": {
+                "type": "string",
+                "description": "开始时间",
+                "example": "2025-09-01 00:00:00"
+              },
+              "end_day": {
+                "type": "string",
+                "description": "结束时间",
+                "example": "2025-09-02 00:00:00"
+              },
+              "sum": {
+                "type": "string",
+                "description": "总流量消耗",
+                "example": "60970.744"
+              },
+              "data_count": {
+                "type": "object",
+                "description": "时间段流量统计",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "example": {
+                  "2025-09-01 00:00": "1520.593",
+                  "2025-09-01 00:05": "1586.993",
+                  "2025-09-01 00:10": "1201.897"
+                }
+              }
+            }
           }
         },
         "required": ["code", "msg", "data"]
