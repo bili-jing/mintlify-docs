@@ -676,6 +676,12 @@
                 "enum": [0, 1],
                 "example": 0,
                 "format": "int32"
+              },
+              "protocol": {
+                "type": "string",
+                "description": "协议类型",
+                "enum": ["http", "socks5"],
+                "example": "http"
               }
             },
             "description": "动态参数集合"
@@ -704,16 +710,23 @@
             "properties": {
               "hosts": {
                 "type": "array",
-                "description": "IP地址",
+                "description": "IP地址列表",
                 "items": {
                   "type": "string"
                 },
-                "example": ["137.184.190.238","164.92.111.133"]
+                "example": ["38.46.218.38", "38.46.218.39"]
               },
               "port": {
                 "type": "integer",
                 "format": "int32",
-                "description": "端口"
+                "description": "端口",
+                "example": 8080
+              },
+              "protocol": {
+                "type": "string",
+                "description": "协议类型",
+                "enum": ["http", "socks5"],
+                "example": "http"
               }
             }
           }
