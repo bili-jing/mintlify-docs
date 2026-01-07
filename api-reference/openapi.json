@@ -18,11 +18,11 @@
       "post": {
         "description": "用户添加白名单",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "添加白名单请求",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/AddWhitelist"
               }
             }
           },
@@ -56,11 +56,11 @@
       "post": {
         "description": "用户删除白名单",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "删除白名单请求",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/RemoveWhitelist"
               }
             }
           },
@@ -94,11 +94,11 @@
       "post": {
         "description": "用户获取白名单列表",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "获取白名单请求",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CommonRequestBody"
+                "$ref": "#/components/schemas/GetWhitelist"
               }
             }
           },
@@ -539,7 +539,7 @@
         },
         "required": ["name"]
       },
-      "NewPlant": {
+      "AddWhitelist": {
         "type": "object",
         "properties": {
           "appKey": {
@@ -552,6 +552,71 @@
               "ipAddress": {
                 "type": "string",
                 "description" : "IP地址"
+              },
+              "remarks": {
+                "type": "string",
+                "description": "备注"
+              },
+              "provider": {
+                "type": "integer",
+                "format": "int32",
+                "description": "池子类型：目前只支持1",
+                "enum": [1],
+                "default": 1,
+                "example": 1
+              }
+            },
+            "required": ["ipAddress"],
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey", "params"]
+      },
+      "GetWhitelist": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "integer",
+                "format": "int32",
+                "description": "池子类型：目前只支持1",
+                "enum": [1],
+                "default": 1,
+                "example": 1
+              }
+            },
+            "description": "动态参数集合"
+          }
+        },
+        "required": ["appKey"]
+      },
+      "RemoveWhitelist": {
+        "type": "object",
+        "properties": {
+          "appKey": {
+            "type": "string",
+            "description":"AppKey密钥"
+          },
+          "params": {
+            "type": "object",
+            "properties": {
+              "ipAddress": {
+                "type": "string",
+                "description" : "IP地址"
+              },
+              "provider": {
+                "type": "integer",
+                "format": "int32",
+                "description": "池子类型：目前只支持1",
+                "enum": [1],
+                "default": 1,
+                "example": 1
               }
             },
             "required": ["ipAddress"],
