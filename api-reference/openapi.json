@@ -603,6 +603,14 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "流量"
+              },
+              "provider": {
+                "type": "integer",
+                "format": "int32",
+                "description": "池子类型：1=精选美区，2=全球混合",
+                "enum": [1, 2],
+                "default": 2,
+                "example": 2
               }
             },
             "required": ["username", "traffic"],
