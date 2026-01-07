@@ -14,7 +14,7 @@
     }
   ],
   "paths": {
-    "/account/addWhitelist": {
+    "/account/addWhiteList": {
       "post": {
         "description": "用户添加白名单",
         "requestBody": {
