@@ -769,6 +769,7 @@
       },
       "GetIpAddressParams":{
         "type": "object",
+        "description": "获取代理IP服务器地址请求参数",
         "properties": {
           "appKey": {
             "type": "string",
@@ -777,27 +778,30 @@
           "params": {
             "type": "object",
             "properties": {
-              "asian": {
+              "provider": {
                 "type": "integer",
-                "description" : "地区 0:非亚洲 1:亚洲",
-                "enum": [0, 1],
-                "example": 0,
-                "format": "int32"
+                "format": "int32",
+                "description": "池子类型：1=精选美区，2=全球混合",
+                "minimum": 1,
+                "maximum": 2,
+                "enum": [1, 2],
+                "example": 2
               },
               "protocol": {
                 "type": "string",
-                "description": "协议类型",
+                "description": "协议类型：http或socks5",
                 "enum": ["http", "socks5"],
-                "example": "http"
+                "example": "socks5"
               }
             },
             "description": "动态参数集合"
           }
         },
-        "required": ["appKey", "params"]
+        "required": ["appKey"]
       },
       "GetIpAddressResponse":{
         "type": "object",
+        "description": "代理IP服务器地址响应",
         "properties": {
           "code": {
             "default": 0,
@@ -812,28 +816,28 @@
             "type": "string"
           },
           "data":{
-            "description": "响应数据",
+            "description": "代理服务器信息",
             "type": "object",
             "properties": {
               "hosts": {
                 "type": "array",
-                "description": "IP地址列表",
+                "description": "代理服务器域名列表",
                 "items": {
                   "type": "string"
                 },
-                "example": ["38.46.218.38", "38.46.218.39"]
+                "example": ["t1.cakeip.app", "t2.cakeip.app", "t3.cakeip.app"]
               },
               "port": {
                 "type": "integer",
                 "format": "int32",
                 "description": "端口",
-                "example": 8080
+                "example": 10000
               },
               "protocol": {
                 "type": "string",
                 "description": "协议类型",
                 "enum": ["http", "socks5"],
-                "example": "http"
+                "example": "socks5"
               }
             }
           }
