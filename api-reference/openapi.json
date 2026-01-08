@@ -560,7 +560,7 @@
               "provider": {
                 "type": "integer",
                 "format": "int32",
-                "description": "池子类型：目前只支持1",
+                "description": "池子类型：1=精选美区（目前只支持1）",
                 "enum": [1],
                 "default": 1,
                 "example": 1
@@ -585,7 +585,7 @@
               "provider": {
                 "type": "integer",
                 "format": "int32",
-                "description": "池子类型：目前只支持1",
+                "description": "池子类型：1=精选美区（目前只支持1）",
                 "enum": [1],
                 "default": 1,
                 "example": 1
@@ -613,7 +613,7 @@
               "provider": {
                 "type": "integer",
                 "format": "int32",
-                "description": "池子类型：目前只支持1",
+                "description": "池子类型：1=精选美区（目前只支持1）",
                 "enum": [1],
                 "default": 1,
                 "example": 1
