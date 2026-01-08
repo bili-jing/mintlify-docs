@@ -130,9 +130,9 @@
     },
     "/account/getUsableTraffic": {
       "post": {
-        "description": "用户获取剩余流量",
+        "description": "用户获取剩余流量（汇总所有供应商流量，并返回各供应商明细）",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "获取剩余流量请求",
           "content": {
             "application/json": {
               "schema": {
@@ -144,7 +144,7 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "获取剩余流量成功",
             "content": {
               "application/json": {
                 "schema": {
@@ -507,6 +507,7 @@
       },
       "Traffic": {
         "type": "object",
+        "description": "获取剩余流量响应（汇总所有供应商流量）",
         "properties": {
           "code": {
             "default": 0,
@@ -521,23 +522,56 @@
             "type": "string"
           },
           "data":{
-            "description": "响应数据",
+            "description": "流量数据（汇总所有供应商）",
             "type": "object",
             "properties": {
-              "traffic": {
-                "type": "integer",
-                "format": "int32",
-                "description": "剩余流量"
-              },
               "fullTraffic": {
                 "type": "integer",
                 "format": "int32",
-                "description": "总流量"
+                "description": "用户总购买量（所有供应商累计）",
+                "example": 1000
+              },
+              "traffic": {
+                "type": "integer",
+                "format": "int32",
+                "description": "所有供应商剩余流量总和",
+                "example": 800
+              },
+              "details": {
+                "type": "array",
+                "description": "各供应商流量明细",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "provider": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "供应商类型：1=精选美区，2=全球混合",
+                      "enum": [1, 2],
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "供应商名称",
+                      "example": "精选美区"
+                    },
+                    "traffic": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "该供应商剩余流量",
+                      "example": 300
+                    }
+                  }
+                },
+                "example": [
+                  { "provider": 1, "name": "精选美区", "traffic": 300 },
+                  { "provider": 2, "name": "全球混合", "traffic": 500 }
+                ]
               }
             }
           }
         },
-        "required": ["name"]
+        "required": ["code", "msg", "data"]
       },
       "AddWhitelist": {
         "type": "object",
@@ -899,6 +933,7 @@
       },
       "QueryTrafficUsage": {
         "type": "object",
+        "description": "查询流量消耗请求参数",
         "properties": {
           "appKey": {
             "type": "string",
@@ -906,25 +941,36 @@
           },
           "type": {
             "type": "string",
-            "description": "查询类型",
-            "enum": ["5min", "day"],
-            "example": "5min"
+            "description": "查询粒度：day=按天统计，5min=按5分钟统计",
+            "enum": ["day", "5min"],
+            "example": "day"
           },
           "startDay": {
             "type": "string",
-            "description": "开始日期",
-            "example": "2025-09-01"
+            "format": "date",
+            "description": "开始日期（格式：YYYY-MM-DD）",
+            "example": "2024-01-01"
           },
           "endDay": {
             "type": "string",
-            "description": "结束日期",
-            "example": "2025-09-02"
+            "format": "date",
+            "description": "结束日期（格式：YYYY-MM-DD）",
+            "example": "2024-01-02"
+          },
+          "provider": {
+            "type": "integer",
+            "format": "int32",
+            "description": "池子类型：1=精选美区，2=全球混合",
+            "enum": [1, 2],
+            "default": 2,
+            "example": 2
           }
         },
         "required": ["appKey", "type", "startDay", "endDay"]
       },
       "TrafficUsageResponse": {
         "type": "object",
+        "description": "流量消耗查询响应。data为数组格式，每条记录包含时间和流量值。时间格式根据查询粒度不同：type=day时为'YYYY-MM-DD'，type=5min时为'YYYY-MM-DD HH:mm:ss'",
         "properties": {
           "code": {
             "default": 0,
@@ -937,67 +983,46 @@
           "msg": {
             "description": "响应消息",
             "type": "string",
-            "example": "success"
+            "example": "查询成功"
           },
           "data": {
-            "description": "流量使用数据",
-            "type": "object",
-            "properties": {
-              "limit": {
-                "type": "integer",
-                "format": "int32",
-                "description": "限制数量",
-                "example": 99999999
-              },
-              "offset": {
-                "type": "integer",
-                "format": "int32",
-                "description": "偏移量",
-                "example": 0
-              },
-              "count": {
-                "type": "integer",
-                "format": "int32",
-                "description": "当前数量",
-                "example": 287
-              },
-              "total": {
-                "type": "integer",
-                "format": "int32",
-                "description": "总数量",
-                "example": 287
-              },
-              "start_day": {
-                "type": "string",
-                "description": "开始时间",
-                "example": "2025-09-01 00:00:00"
-              },
-              "end_day": {
-                "type": "string",
-                "description": "结束时间",
-                "example": "2025-09-02 00:00:00"
-              },
-              "sum": {
-                "type": "string",
-                "description": "总流量消耗",
-                "example": "60970.744"
-              },
-              "data_count": {
-                "type": "object",
-                "description": "时间段流量统计",
-                "additionalProperties": {
-                  "type": "string"
+            "description": "流量使用记录列表",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "string",
+                  "description": "时间点。type=day时格式为'YYYY-MM-DD'，type=5min时格式为'YYYY-MM-DD HH:mm:ss'",
+                  "example": "2024-01-01"
                 },
-                "example": {
-                  "2025-09-01 00:00": "1520.593",
-                  "2025-09-01 00:05": "1586.993",
-                  "2025-09-01 00:10": "1201.897"
+                "traffic": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "该时间段流量消耗（单位：MB）",
+                  "example": 100.5
                 }
               }
-            }
+            },
+            "example": [
+              { "time": "2024-01-01", "traffic": 100.5 },
+              { "time": "2024-01-02", "traffic": 200.3 }
+            ]
+          },
+          "total": {
+            "type": "integer",
+            "format": "int32",
+            "description": "记录数",
+            "example": 2
+          },
+          "sum": {
+            "type": "number",
+            "format": "float",
+            "description": "总流量消耗（单位：MB）",
+            "example": 300.8
           }
         },
-        "required": ["code", "msg", "data"]
+        "required": ["code", "msg", "data", "total", "sum"]
       },
       "Error": {
         "type": "object",
